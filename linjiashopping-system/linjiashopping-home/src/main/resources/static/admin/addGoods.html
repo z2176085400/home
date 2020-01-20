@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="../static/css/bootstrap.min.css"/>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/DatePicker.js"></script>
+    <script src="../static/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="../static/js/ajax.js"></script>
+    <title>商品添加页面</title>
+</head>
+<body>
+<div class="row" style="margin-left: 20px;">
+    <form action="#" method="post" enctype="multipart/form-data" onsubmit="return false;">
+        <div>
+            <h3>修改商品</h3>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-6">
+
+                <div class="form-group form-inline">
+                    <label>名称:</label>
+                    <input type="text" name="goods_name" class="form-control"/>
+                </div>
+
+                <div class="form-group form-inline">
+                    <label>分类:</label>
+                    <select name="typeid" class="form-control">
+
+
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <label>时间:</label>
+                    <input type="text" name="updatetime" readonly="readonly" class="form-control"
+                           onclick="setday(this)"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-inline">
+                    <label>价格:</label>
+                    <input type="text" name="price" class="form-control"/> 元
+                </div>
+                <div class="form-group form-inline">
+                    <label>评分:</label>
+                    <input type="text" name="score" class="form-control"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group form-inline">
+                    <label>商品图片</label>
+                    <input type="file" name="imgpath"/>
+                </div>
+                <div class="form-group ">
+                    <label>商品简介</label>
+                    <textarea name="goods_desc" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="form-group form-inline">
+                    <input type="submit" value="添加" class="btn btn-primary"/>
+                    <input type="reset" value="重置" class="btn btn-default"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function refresh() {
+        ajaxHttp({
+            type: "get",
+            url: "/admin/token/refresh",
+            dataType: "json",
+
+            success: function (data) {
+                if (data.code == 200) {
+                    localStorage.setItem('token', data.data['token']);
+                    console.log(localStorage.getItem("token"))
+
+                } else if (data.code != 200) {
+                    alert("请重新登陆");
+                    window.location.href = "/login/login.html";
+                }
+            }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    $("form").submit(function () {
+        $("form").ajaxSubmit({
+            type: "post",
+            url: "/mishoppingsys/goods/goodAdd.do" + window.location.search,
+            data: $("form").serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    window.location.href = "showGoods.html";
+                } else {
+                    alert(data.info);
+                }
+            }
+
+
+        })
+    })
+
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "/mishoppingsys/type/goodsTypeList.do?id=2",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+
+                        var html = '<option value="' + this.tid + '">' + this.typename + '</option>';
+                        $("select").append($(html));
+
+                    })
+
+                }
+
+            }
+
+        })
+    })
+
+</script>
+</body>
+</html>

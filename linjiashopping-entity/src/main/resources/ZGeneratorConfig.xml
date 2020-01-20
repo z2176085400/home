@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="mysql" defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 通用mapper插件 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+            <property name="forceAnnotation" value="true"/>
+            <property name="beginningDelimiter" value="`"/>
+            <property name="endingDelimiter" value="`"/>
+        </plugin>
+
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressTypeWarnings" value="true"/><!-- 抑制警告 -->
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/><!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- 代码生成统一放到target路径下，以免直接覆盖原有的代码造成不可挽回的损失。 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://47.114.52.253:3306/mall"
+                        userId="root" password="1234567"/>
+
+        <javaModelGenerator targetPackage="com.zkz.entity"
+                            targetProject="MAVEN">
+            <property name="enableSubPackages" value="true"/>
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.zkz.mapping"
+                         targetProject="MAVEN">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zkz.home.dao"
+                             targetProject="MAVEN">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="ums_admin_login_log" domainObjectName="UmsAdminLoginLog"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+        <!--
+                 <table tableName="ums_admin_permission_relation" domainObjectName="UmsAdminPermissionRelation"
+                        enableSelectByExample="false"
+                        enableDeleteByExample="false"
+                        enableCountByExample="false"
+                        enableUpdateByExample="false">
+                     <generatedKey column="id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                 </table>
+
+                 <table tableName="ums_admin_role_relation" domainObjectName="UmsAdminRoleRelation"
+                        enableSelectByExample="false"
+                        enableDeleteByExample="false"
+                        enableCountByExample="false"
+                        enableUpdateByExample="false">
+                     <generatedKey column="id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                 </table>
+
+                 <table tableName="ums_permission" domainObjectName="UmsPermission"
+                        enableSelectByExample="false"
+                        enableDeleteByExample="false"
+                        enableCountByExample="false"
+                        enableUpdateByExample="false">
+                     <generatedKey column="id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                 </table>
+
+                 <table tableName="ums_role" domainObjectName="UmsRole"
+                        enableSelectByExample="false"
+                        enableDeleteByExample="false"
+                        enableCountByExample="false"
+                        enableUpdateByExample="false">
+                     <generatedKey column="id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                 </table>
+
+                 <table tableName="ums_role_permission_relation" domainObjectName="UmsRolePermissionRelation"
+                        enableSelectByExample="false"
+                        enableDeleteByExample="false"
+                        enableCountByExample="false"
+                        enableUpdateByExample="false">
+                     <generatedKey column="id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                 </table>-->
+
+        <!-- <table tableName="T_CUST_WORK_INFO" domainObjectName="CustWorkInfoDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="work_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_CHANNEL" domainObjectName="FinanceChannelDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="channel_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_CHANNEL_FILES" domainObjectName="FinanceChannelFilesDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="file_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_CHANNEL_PUSH" domainObjectName="FinanceChannelPushDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="push_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_MATERIAL" domainObjectName="FinanceMaterialDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="mate_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_MATERIAL_FILES" domainObjectName="FinanceMaterialFilesDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="file_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_ORDER_PUSH_LINE" domainObjectName="FinanceOrderPushLineDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="push_line_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_ORDER" domainObjectName="FinanceOrderDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="fina_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_PRODUCT" domainObjectName="FinanceProductDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="prod_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_FINANCE_PROD_FQ" domainObjectName="FinanceProdFqDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="fq_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_ORG" domainObjectName="OrgDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="org_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_ORG_CATEGORY" domainObjectName="OrgCategoryDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="cate_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_ORG_META" domainObjectName="OrgMetaDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+        </table>
+
+        <table tableName="T_RESOURCE" domainObjectName="ResourceDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="resource_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_ROLE" domainObjectName="RoleDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="role_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_USER" domainObjectName="UserDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="user_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+        </table>
+
+        <table tableName="T_USER_ROLE" domainObjectName="UserRoleDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+        </table>
+
+        <table tableName="T_ROLE_RESOURCE" domainObjectName="RoleResourceDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+        </table>
+
+        <table tableName="T_USER_ORG" domainObjectName="UserOrgDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+        </table>
+
+        <table tableName="BX_INSURE_ORDER_LINE" domainObjectName="BxinsureOrderLineDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="line_id" sqlStatement="JDBC"/>
+        </table>-->
+        <!--        <table tableName="T_H5_ORDER" domainObjectName="H5OrderDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="order_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                </table>
+                <table tableName="T_H5_CUSTOMER_INFO" domainObjectName="H5CustomerInfoDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="customer_id" sqlStatement="select upper(replace(uuid(),'-',''))" identity="false" type="pre"/>
+                </table>-->
+        <!--        <table tableName="t_category" domainObjectName="CategoryDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_field" domainObjectName="FieldDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_field_value" domainObjectName="FieldValueDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_image" domainObjectName="ImageDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_product" domainObjectName="ProductDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_product_brand" domainObjectName="ProductBrandDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_product_org" domainObjectName="ProductOrgDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+
+                </table>
+
+                <table tableName="t_template" domainObjectName="TemplateDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>
+
+                <table tableName="t_template_field" domainObjectName="TemplateFieldDO"
+                       enableSelectByExample="false"
+                       enableDeleteByExample="false"
+                       enableCountByExample="false"
+                       enableUpdateByExample="false">
+                    <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+                </table>-->
+
+        <!--<table tableName="t_product_brand" domainObjectName="ProductBrandDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+        </table>
+
+
+        <table tableName="t_product_model" domainObjectName="ProductModelDO"
+               enableSelectByExample="false"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
+
+        <!--     <table tableName="t_product_model_plan" domainObjectName="ProductModelPlanDO"
+                    enableSelectByExample="false"
+                    enableDeleteByExample="false"
+                    enableCountByExample="false"
+                    enableUpdateByExample="false">
+                 <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+             </table>-->
+
+    </context>
+</generatorConfiguration>

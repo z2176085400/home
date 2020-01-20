@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/ajax.js">
+
+    </script>
+    <title>商品分类</title>
+</head>
+<body>
+<div class="row" style="width:98%;margin-left: 1%;">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                商品类型
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+
+                </div>
+                <div style="height: 400px;overflow: scroll;">
+                    <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                            <td>序号</td>
+                            <td>类型</td>
+                            <td>等级</td>
+                            <td>所属类型</td>
+                            <td>操作</td>
+                        </tr>
+                        <tbody id="tb_list"></tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "/mishoppingsys/goods/goodsTypeList.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+
+                        var html = "<tr>";
+                        html += "<td>" + this.tid + "</td>";
+                        html += "<td>" + this.typename + "</td>";
+                        html += "<td>" + this.typeLevel + "</td>";
+                        html += "<td>" + this.parentName + "</td>";
+                        html += '<td><button type="button"  id="remove"  onclick="remove(' + this.tid + ')" return false;>删除</button>  </td>';
+                        html += '<td><button type="button"  id="modify"  onclick="modify(' + this.tid + ')" return false;>修改</button>  </td>';
+
+                        html += '</tr>'
+                        $("#tb_list").append($(html));
+                    })
+                }
+
+            }
+
+
+        })
+    })
+
+</script>
+
+<script type="text/javascript">
+    function refresh() {
+        ajaxHttp({
+            type: "get",
+            url: "/admin/token/refresh",
+            dataType: "json",
+
+            success: function (data) {
+                if (data.code == 200) {
+                    localStorage.setItem('token', data.data['token']);
+                    console.log(localStorage.getItem("token"))
+
+                } else if (data.code != 200) {
+                    alert("请重新登陆");
+                    window.location.href = "/login/login.html";
+                }
+            }
+        })
+    }
+</script>
+
+
+</body>
+</html>
