@@ -9,9 +9,7 @@ jasypt:
     password: G0CvDz7oJn6
 
 logging:
-  level:
-    root: info #日志配置DEBUG,INFO,WARN,ERROR
-    com.zkz.message: debug
+  path: /opt/logs/lilinjiashopping
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
